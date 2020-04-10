@@ -140,7 +140,7 @@ double TransformToD(char m){
 }
 
 int TransformToQianzhui(char* s,char* qianzhui){
-	int i=0,j=0;
+	int i=0,j=0,left=0,right=0;
     while(s[i]!='\0'){
 	    if(s[i]>='0'&&s[i]<='9'){
 	              push(s,qianzhui,&i,&j);
@@ -156,10 +156,12 @@ int TransformToQianzhui(char* s,char* qianzhui){
 	                                            qianzhui[j]='0';
                                                 j++;
                                                 push(s,qianzhui,&i,&j);
-                            }else{
+                            }else if(qianzhui[j-1]=='+'||qianzhui[j-1]=='-'||qianzhui[j-1]=='*'||qianzhui[j-1]=='/'){
 	                           //                 printf("ÊäÈë´íÎó\n");
                                 return 0;
-                            }
+                            }else{
+	                                           push(s,qianzhui,&i,&j);
+}
                          }
                          break;
                 case '*':
@@ -183,8 +185,11 @@ int TransformToQianzhui(char* s,char* qianzhui){
                                           push(s,qianzhui,&i,&j);
                         }
                          break;
-                case '(':
+                case '(':push(s,qianzhui,&i,&j);
+                                     left++;
+                         break;
 	            case ')':push(s,qianzhui,&i,&j);
+                                      right++;
                          break;
                 default:return 0;
             }
@@ -192,5 +197,8 @@ int TransformToQianzhui(char* s,char* qianzhui){
     }
       qianzhui[j]='\0';
 //printf("%s",qianzhui);
-    return 1;
+   if(left!=right){
+	return 0;
+   } 
+   return 1;
 }
