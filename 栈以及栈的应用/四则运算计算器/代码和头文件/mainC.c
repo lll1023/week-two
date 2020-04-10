@@ -1,10 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include<string.h>
 #include "Calculator.h"
 
 int init(){ 
     
     int choice;
+    char check[100];
     	printf(
     
 		"\n\t_________________计算器功能菜单___________________________\t\n"
@@ -13,16 +15,26 @@ int init(){
 		"\t|_________________________________________________________|\t\n\n"
 	);
     	printf("\t请输入你想进行的操作：");
-    
+        scanf("%s",check);
 	//输入检测
-   while(scanf("%d",&choice)!=1){
-    	printf("请输入供参考的选项：");
-       fflush(stdin);
-   }
-	while (choice<1||choice>2){//判断执行1-6，并且检测合法输入
-		printf("\t您的输入: '%d' 有误!请重新输入：", choice);
-		scanf(" %d", &choice); 
-	}
+     while(1){
+        while(strlen(check)!=1){ 
+                	printf("请输入供参考的选项：");
+                   scanf("%s",check);
+    //  fflush(stdin);
+        }
+           choice=(int)check[0]-48;
+       if(choice==1||choice==2){
+	      break;
+       }
+           	printf("请输入供参考的选项：");
+           scanf("%s",check);
+     }
+
+//	while (choice<1||choice>2){//判断执行1-6，并且检测合法输入
+//		printf("\t您的输入: '%d' 有误!请重新输入：", choice);
+//		scanf(" %d", &choice); 
+//	}
     
 	return choice;
 }
