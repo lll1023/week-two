@@ -41,7 +41,7 @@ int main(){
 	while (1){ 
            choice=init();
        //确定只能初始化一次 
-        if(flag==0&&choice!=1){
+        if(flag==0&&choice>1&&choice<9){
 	             printf("请先初始化栈");
             continue;
         }else if(flag==1&&choice==1){
